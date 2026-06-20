@@ -20,6 +20,10 @@ class _CoursesScreenState
 
   late List<Course> filteredCourses;
 
+  String selectedCategory = "All";
+
+  String searchQuery = "";
+
   @override
   void initState() {
     super.initState();
@@ -27,24 +31,88 @@ class _CoursesScreenState
     filteredCourses = allCourses;
   }
 
-  void searchCourses(String query) {
+  void applyFilters() {
 
-    setState(() {
+    List<Course> tempCourses =
+        allCourses;
 
-      filteredCourses =
-          allCourses.where((course) {
+    if (selectedCategory != "All") {
+
+      tempCourses =
+          tempCourses.where((course) {
 
             return course.title
                 .toLowerCase()
                 .contains(
-              query.toLowerCase(),
+              selectedCategory
+                  .toLowerCase(),
             );
 
           }).toList();
+    }
+
+    if (searchQuery.isNotEmpty) {
+
+      tempCourses =
+          tempCourses.where((course) {
+
+            return course.title
+                .toLowerCase()
+                .contains(
+              searchQuery
+                  .toLowerCase(),
+            );
+
+          }).toList();
+    }
+
+    setState(() {
+
+      filteredCourses = tempCourses;
+
     });
   }
 
-  IconData getCourseIcon(String title) {
+  void searchCourses(
+      String query,
+      ) {
+
+    searchQuery = query;
+
+    applyFilters();
+  }
+
+  void filterByCategory(
+      String category,
+      ) {
+
+    selectedCategory = category;
+
+    applyFilters();
+  }
+
+  Widget buildChip(
+      String label,
+      ) {
+
+    return ChoiceChip(
+
+      label: Text(label),
+
+      selected:
+      selectedCategory == label,
+
+      onSelected: (_) {
+
+        filterByCategory(label);
+
+      },
+    );
+  }
+
+  IconData getCourseIcon(
+      String title,
+      ) {
 
     if (title.contains("Flutter")) {
       return Icons.phone_android;
@@ -69,6 +137,7 @@ class _CoursesScreenState
   Widget build(BuildContext context) {
 
     return Scaffold(
+
       appBar: AppBar(
         title: const Text(
           "Explore Courses",
@@ -80,7 +149,9 @@ class _CoursesScreenState
         children: [
 
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(
+              16,
+            ),
 
             child: TextField(
 
@@ -95,7 +166,9 @@ class _CoursesScreenState
                 "Search courses...",
 
                 prefixIcon:
-                const Icon(Icons.search),
+                const Icon(
+                  Icons.search,
+                ),
 
                 border:
                 OutlineInputBorder(
@@ -108,9 +181,39 @@ class _CoursesScreenState
             ),
           ),
 
+          Padding(
+            padding:
+            const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+
+            child: Wrap(
+              spacing: 8,
+              runSpacing: 8,
+
+              children: [
+
+                buildChip("All"),
+
+                buildChip("Flutter"),
+
+                buildChip("Java"),
+
+                buildChip("Spring"),
+
+                buildChip("React"),
+              ],
+            ),
+          ),
+
+          const SizedBox(
+            height: 12,
+          ),
+
           Expanded(
 
-            child: filteredCourses.isEmpty
+            child:
+            filteredCourses.isEmpty
 
                 ? const Center(
               child: Text(
@@ -124,18 +227,24 @@ class _CoursesScreenState
                 : ListView.builder(
 
               padding:
-              const EdgeInsets.only(
+              const EdgeInsets
+                  .only(
                 bottom: 16,
               ),
 
               itemCount:
-              filteredCourses.length,
+              filteredCourses
+                  .length,
 
               itemBuilder:
-                  (context, index) {
+                  (
+                  context,
+                  index,
+                  ) {
 
                 final course =
-                filteredCourses[index];
+                filteredCourses[
+                index];
 
                 return Card(
 
@@ -161,7 +270,9 @@ class _CoursesScreenState
 
                     contentPadding:
                     const EdgeInsets
-                        .all(16),
+                        .all(
+                      16,
+                    ),
 
                     leading:
                     CircleAvatar(
@@ -196,7 +307,8 @@ class _CoursesScreenState
                         top: 8,
                       ),
 
-                      child: Column(
+                      child:
+                      Column(
 
                         crossAxisAlignment:
                         CrossAxisAlignment
@@ -237,7 +349,9 @@ class _CoursesScreenState
 
                         MaterialPageRoute(
                           builder:
-                              (context) =>
+                              (
+                              context,
+                              ) =>
                               CourseDetailScreen(
                                 course:
                                 course,
