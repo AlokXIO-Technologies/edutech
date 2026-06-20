@@ -1,17 +1,93 @@
-# edutech
+# EduTech
 
-A new Flutter project.
+A modern cross-platform learning platform built with Flutter.
+
+EduTech is designed to provide a seamless learning experience across mobile and web platforms. The project focuses on clean architecture, scalable development practices, and a modern user experience.
+
+## Features
+
+### Implemented
+
+* Splash Screen
+* Login Screen
+* Home Screen
+* Navigation Flow
+* Flutter Material Design UI
+* Android Support
+* Web Support
+
+### Planned
+
+* Course Listing
+* Course Details
+* User Authentication
+* Enrollment System
+* REST API Integration
+* State Management
+* Progress Tracking
+* Responsive UI
+
+## Tech Stack
+
+* Flutter
+* Dart
+* Material Design
+* Android Studio
+
+## Project Structure
+
+```text
+lib
+├── data
+├── models
+├── screens
+├── widgets
+└── main.dart
+```
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter SDK
+* Android Studio
+* Android Emulator or Physical Device
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+### Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+git clone https://github.com/<your-username>/edutech.git
+cd edutech
+
+flutter pub get
+flutter run
+```
+
+## Development Roadmap
+
+* [x] Project Setup
+* [x] Splash Screen
+* [x] Login Screen
+* [x] Home Screen
+* [x] Navigation
+* [ ] Course Module
+* [ ] API Integration
+* [ ] Authentication
+* [ ] State Management
+* [ ] Production Deployment
+
+## Screens
+
+Currently implemented:
+
+* Splash Screen
+* Login Screen
+* Home Screen
+
+Additional screens will be added as the project evolves.
+
+## Author
+
+**Alok Verma**
+
+Built with Flutter ❤️
