@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+
+  final bool isDarkMode;
+  final Function(bool) toggleTheme;
+
+  const ProfileScreen({
+    super.key,
+    required this.isDarkMode,
+    required this.toggleTheme,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,13 +80,15 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 12),
 
             Card(
-              child: ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 18,
+              child: SwitchListTile(
+                secondary: const Icon(
+                  Icons.dark_mode,
                 ),
+                title: const Text(
+                  "Dark Mode",
+                ),
+                value: isDarkMode,
+                onChanged: toggleTheme,
               ),
             ),
 

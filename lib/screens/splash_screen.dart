@@ -3,13 +3,24 @@ import 'package:flutter/material.dart';
 import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+
+  final bool isDarkMode;
+
+  final Function(bool) toggleTheme;
+
+  const SplashScreen({
+    super.key,
+    required this.isDarkMode,
+    required this.toggleTheme,
+  });
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreen> createState() =>
+      _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState
+    extends State<SplashScreen> {
 
   @override
   void initState() {
@@ -17,12 +28,21 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(
       const Duration(seconds: 2),
+
           () {
+
         Navigator.pushReplacement(
           context,
+
           MaterialPageRoute(
             builder: (context) =>
-            const LoginScreen(),
+                LoginScreen(
+                  isDarkMode:
+                  widget.isDarkMode,
+
+                  toggleTheme:
+                  widget.toggleTheme,
+                ),
           ),
         );
       },
@@ -31,6 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return const Scaffold(
       body: Center(
         child: Text(

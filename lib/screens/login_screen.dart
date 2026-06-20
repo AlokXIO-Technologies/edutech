@@ -2,7 +2,15 @@ import 'package:flutter/material.dart';
 import 'main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+
+  final bool isDarkMode;
+  final Function(bool) toggleTheme;
+
+  const LoginScreen({
+    super.key,
+    required this.isDarkMode,
+    required this.toggleTheme,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +70,7 @@ class LoginScreen extends StatelessWidget {
             TextField(
               decoration: InputDecoration(
                 labelText: "Email",
+
                 prefixIcon: const Icon(
                   Icons.email_outlined,
                 ),
@@ -80,6 +89,7 @@ class LoginScreen extends StatelessWidget {
 
               decoration: InputDecoration(
                 labelText: "Password",
+
                 prefixIcon: const Icon(
                   Icons.lock_outline,
                 ),
@@ -105,7 +115,13 @@ class LoginScreen extends StatelessWidget {
 
                     MaterialPageRoute(
                       builder: (context) =>
-                      const MainScreen(),
+                          MainScreen(
+                            isDarkMode:
+                            isDarkMode,
+
+                            toggleTheme:
+                            toggleTheme,
+                          ),
                     ),
                   );
                 },
