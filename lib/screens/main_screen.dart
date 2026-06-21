@@ -75,13 +75,13 @@ class _MainScreenState
           ),
 
           NavigationDestination(
-            icon: Icon(Icons.school),
-            label: 'My Courses',
+            icon: Icon(Icons.menu_book),
+            label: 'Materials',
           ),
 
           NavigationDestination(
-            icon: Icon(Icons.menu_book),
-            label: 'Materials',
+            icon: Icon(Icons.school),
+            label: 'My Courses',
           ),
 
           NavigationDestination(

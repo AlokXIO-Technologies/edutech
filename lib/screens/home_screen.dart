@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'courses_screen.dart';
+import '../widgets/banner_slider.dart';
+import '../data/course_repository.dart';
+import '../models/course.dart';
+import '../screens/courses_screen.dart';
+import 'course_detail_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,231 +11,195 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final List<Course> courses =
+    CourseRepository.getCourses();
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-
           child: Column(
             crossAxisAlignment:
             CrossAxisAlignment.start,
 
             children: [
 
-              const Text(
-                "👋 Welcome Back",
-                style: TextStyle(
-                  fontSize: 18,
+              const Padding(
+                padding: EdgeInsets.fromLTRB(
+                  20,
+                  20,
+                  20,
+                  0,
+                ),
+
+                child: Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+
+                  children: [
+
+                    Text(
+                      "👋 Welcome to EduTech",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+
+                    SizedBox(height: 8),
+
+                    Text(
+                      "Alok",
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight:
+                        FontWeight.bold,
+                      ),
+                    ),
+
+                    SizedBox(height: 8),
+
+                    Text(
+                      "Learn Skills. Build Projects.",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
                 ),
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 20),
 
-              const Text(
-                "Alok",
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight:
-                  FontWeight.bold,
-                ),
-              ),
-
-              const SizedBox(height: 6),
-
-              const Text(
-                "Continue learning today",
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
+              const BannerSlider(),
 
               const SizedBox(height: 30),
 
-              Row(
-                children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
 
-                  Expanded(
-                    child: _buildStatCard(
-                      "Courses",
-                      "4",
-                      Icons.menu_book,
+                child: Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+
+                  children: [
+
+                    const Text(
+                      "Popular Courses",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(width: 12),
+                    TextButton(
+                      onPressed: () {
 
-                  Expanded(
-                    child: _buildStatCard(
-                      "Enrolled",
-                      "3",
-                      Icons.school,
+                        Navigator.push(
+                          context,
+
+                          MaterialPageRoute(
+                            builder: (context) =>
+                            const CoursesScreen(),
+                          ),
+                        );
+                      },
+
+                      child: const Text(
+                        "View All",
+                      ),
                     ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 12),
-
-              _buildStatCard(
-                "Overall Progress",
-                "58%",
-                Icons.trending_up,
-              ),
-
-              const SizedBox(height: 30),
-
-              const Text(
-                "Continue Learning",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight:
-                  FontWeight.bold,
+                  ],
                 ),
               ),
 
               const SizedBox(height: 16),
 
-              Card(
-                elevation: 4,
+              ListView.builder(
+                shrinkWrap: true,
+                physics:
+                const NeverScrollableScrollPhysics(),
 
-                shape:
-                RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(
-                    20,
-                  ),
-                ),
+                itemCount: courses.length,
 
-                child: Padding(
-                  padding:
-                  const EdgeInsets.all(
-                    20,
-                  ),
+                itemBuilder:
+                    (context, index) {
 
-                  child: Column(
-                    crossAxisAlignment:
-                    CrossAxisAlignment
-                        .start,
+                  final course =
+                  courses[index];
 
-                    children: [
+                  return Card(
+                    margin:
+                    const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
 
-                      const Text(
-                        "Flutter Basics",
-                        style: TextStyle(
-                          fontSize: 20,
+                    elevation: 4,
+
+                    shape:
+                    RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.circular(
+                        20,
+                      ),
+                    ),
+
+                    child: ListTile(
+                      contentPadding:
+                      const EdgeInsets.all(
+                        16,
+                      ),
+
+                      leading:
+                      const CircleAvatar(
+                        child: Icon(
+                          Icons.school,
+                        ),
+                      ),
+
+                      title: Text(
+                        course.title,
+                        style:
+                        const TextStyle(
                           fontWeight:
                           FontWeight.bold,
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 12,
+                      subtitle: Text(
+                        course.instructor,
                       ),
 
-                      const Text(
-                        "60% Completed",
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 18,
                       ),
 
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      onTap: () {
 
-                      ClipRRect(
-                        borderRadius:
-                        BorderRadius
-                            .circular(
-                          10,
-                        ),
+                        Navigator.push(
+                          context,
 
-                        child:
-                        const LinearProgressIndicator(
-                          value: 0.6,
-                          minHeight: 8,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                CourseDetailScreen(
+                                  course:
+                                  course,
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
 
-              const SizedBox(height: 30),
-
-              SizedBox(
-                width: double.infinity,
-                height: 55,
-
-                child: ElevatedButton.icon(
-                  icon: const Icon(
-                    Icons.school,
-                  ),
-
-                  label: const Text(
-                    "Explore Courses",
-                  ),
-
-                  onPressed: () {
-
-                    Navigator.push(
-                      context,
-
-                      MaterialPageRoute(
-                        builder:
-                            (context) =>
-                        const CoursesScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              const SizedBox(height: 20),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  static Widget _buildStatCard(
-      String title,
-      String value,
-      IconData icon,
-      ) {
-
-    return Card(
-      elevation: 4,
-
-      shape:
-      RoundedRectangleBorder(
-        borderRadius:
-        BorderRadius.circular(20),
-      ),
-
-      child: Padding(
-        padding:
-        const EdgeInsets.all(20),
-
-        child: Column(
-          children: [
-
-            Icon(
-              icon,
-              size: 32,
-            ),
-
-            const SizedBox(height: 10),
-
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight:
-                FontWeight.bold,
-              ),
-            ),
-
-            const SizedBox(height: 4),
-
-            Text(title),
-          ],
         ),
       ),
     );
