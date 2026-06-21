@@ -3,7 +3,7 @@ import '../widgets/banner_slider.dart';
 import '../data/course_repository.dart';
 import '../models/course.dart';
 import '../screens/courses_screen.dart';
-import 'course_detail_screen.dart';
+import '../widgets/course_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -129,70 +129,8 @@ class HomeScreen extends StatelessWidget {
                   final course =
                   courses[index];
 
-                  return Card(
-                    margin:
-                    const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 8,
-                    ),
-
-                    elevation: 4,
-
-                    shape:
-                    RoundedRectangleBorder(
-                      borderRadius:
-                      BorderRadius.circular(
-                        20,
-                      ),
-                    ),
-
-                    child: ListTile(
-                      contentPadding:
-                      const EdgeInsets.all(
-                        16,
-                      ),
-
-                      leading:
-                      const CircleAvatar(
-                        child: Icon(
-                          Icons.school,
-                        ),
-                      ),
-
-                      title: Text(
-                        course.title,
-                        style:
-                        const TextStyle(
-                          fontWeight:
-                          FontWeight.bold,
-                        ),
-                      ),
-
-                      subtitle: Text(
-                        course.instructor,
-                      ),
-
-                      trailing: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 18,
-                      ),
-
-                      onTap: () {
-
-                        Navigator.push(
-                          context,
-
-                          MaterialPageRoute(
-                            builder:
-                                (context) =>
-                                CourseDetailScreen(
-                                  course:
-                                  course,
-                                ),
-                          ),
-                        );
-                      },
-                    ),
+                  return CourseCard(
+                    course: course,
                   );
                 },
               ),

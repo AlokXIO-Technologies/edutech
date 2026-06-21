@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'login_screen.dart';
+import '../main.dart';
 
 class ProfileScreen extends StatelessWidget {
 
@@ -28,11 +30,16 @@ class ProfileScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            const CircleAvatar(
-              radius: 50,
-              child: Icon(
+            CircleAvatar(
+              radius: 55,
+              backgroundColor:
+              Theme.of(context)
+                  .colorScheme
+                  .primaryContainer,
+
+              child: const Icon(
                 Icons.person,
-                size: 50,
+                size: 60,
               ),
             ),
 
@@ -49,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 6),
 
             const Text(
-              "Flutter Learner",
+              "Software Developer",
               style: TextStyle(
                 color: Colors.grey,
               ),
@@ -80,6 +87,21 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 12),
 
             Card(
+              child: ListTile(
+                leading: Icon(Icons.emoji_events),
+                title: Text("Achievements"),
+                subtitle: Text("Completed 3 Tests"),
+              ),
+
+            ),
+            Card(
+              child: ListTile(
+                leading: Icon(Icons.info_outline),
+                title: Text("EduTech"),
+                subtitle: Text("Version 1.0.0"),
+              ),
+            ),
+            Card(
               child: SwitchListTile(
                 secondary: const Icon(
                   Icons.dark_mode,
@@ -97,13 +119,22 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
 
-              child: ElevatedButton.icon(
-                onPressed: () {},
+              child: FilledButton.icon(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
 
-                icon: const Icon(Icons.logout),
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const EduTechApp(),
+                    ),
 
-                label: const Text("Logout"),
-              ),
+                        (route) => false,
+                  );
+                },
+                icon: Icon(Icons.logout),
+                label: Text("Logout"),
+              )
             ),
           ],
         ),

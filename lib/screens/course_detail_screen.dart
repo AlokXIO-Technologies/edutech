@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/course.dart';
 
 class CourseDetailScreen extends StatelessWidget {
-
   final Course course;
 
   const CourseDetailScreen({
@@ -13,49 +12,90 @@ class CourseDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Course Detail"),
+        title: const Text("Course Details"),
       ),
 
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(16),
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
           children: [
 
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
 
-              decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .colorScheme
-                    .primaryContainer,
-                borderRadius:
-                BorderRadius.circular(20),
+              child: Image.asset(
+                course.image,
+                width: double.infinity,
+                height: 220,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Text(
+              course.title,
+              style: const TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 8),
+
+            Text(
+              course.price,
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Card(
+              elevation: 3,
+
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
 
               child: Column(
                 children: [
 
-                  const Icon(
-                    Icons.menu_book,
-                    size: 60,
+                  ListTile(
+                    leading: const Icon(Icons.person),
+                    title: const Text("Instructor"),
+                    subtitle: Text(
+                      course.instructor,
+                    ),
                   ),
 
-                  const SizedBox(height: 12),
+                  const Divider(height: 1),
 
-                  Text(
-                    course.title,
-                    textAlign: TextAlign.center,
+                  ListTile(
+                    leading: const Icon(Icons.schedule),
+                    title: const Text("Duration"),
+                    subtitle: Text(
+                      course.duration,
+                    ),
+                  ),
 
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
+                  const Divider(height: 1),
+
+                  ListTile(
+                    leading: const Icon(
+                      Icons.workspace_premium,
+                    ),
+                    title: const Text("Validity"),
+                    subtitle: Text(
+                      course.validity,
                     ),
                   ),
                 ],
@@ -64,42 +104,10 @@ class CourseDetailScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.person,
-                ),
-                title: const Text(
-                  "Instructor",
-                ),
-                subtitle: Text(
-                  course.instructor,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.access_time,
-                ),
-                title: const Text(
-                  "Duration",
-                ),
-                subtitle: Text(
-                  course.duration,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
             const Text(
               "About Course",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -109,37 +117,90 @@ class CourseDetailScreen extends StatelessWidget {
             Text(
               course.description,
               style: const TextStyle(
-                height: 1.5,
+                height: 1.6,
+                fontSize: 16,
               ),
             ),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
+
+            const Text(
+              "What You'll Learn",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 12),
+
+            const Card(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+
+                child: Column(
+                  crossAxisAlignment:
+                  CrossAxisAlignment.start,
+
+                  children: [
+
+                    Text(
+                      "✔ Build real-world projects",
+                    ),
+
+                    SizedBox(height: 8),
+
+                    Text(
+                      "✔ Learn industry best practices",
+                    ),
+
+                    SizedBox(height: 8),
+
+                    Text(
+                      "✔ Gain practical experience",
+                    ),
+
+                    SizedBox(height: 8),
+
+                    Text(
+                      "✔ Complete hands-on assignments",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 30),
 
             SizedBox(
               width: double.infinity,
+              height: 55,
 
               child: ElevatedButton.icon(
                 icon: const Icon(
-                  Icons.school,
+                  Icons.shopping_cart,
                 ),
 
-                label: const Text(
-                  "Enroll Now",
+                label: Text(
+                  "Buy Course • ${course.price}",
                 ),
 
                 onPressed: () {
 
                   ScaffoldMessenger.of(context)
                       .showSnackBar(
+
                     SnackBar(
                       content: Text(
-                        "Enrolled in ${course.title}",
+                        "${course.title} purchase feature coming soon",
                       ),
                     ),
                   );
                 },
               ),
             ),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),

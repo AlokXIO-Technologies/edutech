@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/course_repository.dart';
 import '../models/course.dart';
-import 'course_detail_screen.dart';
+import '../widgets/course_card.dart';
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});
@@ -246,120 +246,8 @@ class _CoursesScreenState
                 filteredCourses[
                 index];
 
-                return Card(
-
-                  margin:
-                  const EdgeInsets
-                      .symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-
-                  elevation: 4,
-
-                  shape:
-                  RoundedRectangleBorder(
-                    borderRadius:
-                    BorderRadius
-                        .circular(
-                      20,
-                    ),
-                  ),
-
-                  child: ListTile(
-
-                    contentPadding:
-                    const EdgeInsets
-                        .all(
-                      16,
-                    ),
-
-                    leading:
-                    CircleAvatar(
-                      radius: 24,
-
-                      child: Icon(
-                        getCourseIcon(
-                          course.title,
-                        ),
-                      ),
-                    ),
-
-                    title: Text(
-                      course.title,
-
-                      style:
-                      const TextStyle(
-                        fontWeight:
-                        FontWeight
-                            .bold,
-
-                        fontSize: 18,
-                      ),
-                    ),
-
-                    subtitle:
-                    Padding(
-
-                      padding:
-                      const EdgeInsets
-                          .only(
-                        top: 8,
-                      ),
-
-                      child:
-                      Column(
-
-                        crossAxisAlignment:
-                        CrossAxisAlignment
-                            .start,
-
-                        mainAxisSize:
-                        MainAxisSize
-                            .min,
-
-                        children: [
-
-                          Text(
-                            "👨‍🏫 ${course.instructor}",
-                          ),
-
-                          const SizedBox(
-                            height: 4,
-                          ),
-
-                          Text(
-                            "⏱ ${course.duration}",
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    trailing:
-                    const Icon(
-                      Icons
-                          .arrow_forward_ios,
-                      size: 18,
-                    ),
-
-                    onTap: () {
-
-                      Navigator.push(
-                        context,
-
-                        MaterialPageRoute(
-                          builder:
-                              (
-                              context,
-                              ) =>
-                              CourseDetailScreen(
-                                course:
-                                course,
-                              ),
-                        ),
-                      );
-                    },
-                  ),
+                return CourseCard(
+                  course: course,
                 );
               },
             ),

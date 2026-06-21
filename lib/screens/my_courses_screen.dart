@@ -8,9 +8,7 @@ class MyCoursesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "My Courses",
-        ),
+        title: const Text("My Courses"),
         centerTitle: true,
       ),
 
@@ -21,30 +19,27 @@ class MyCoursesScreen extends StatelessWidget {
 
           _buildCourseCard(
             context,
+            image: "assets/courses/flutter.png",
             title: "Flutter Basics",
             progress: 0.60,
-            percentage: "60%",
-            icon: Icons.phone_android,
           ),
 
           const SizedBox(height: 16),
 
           _buildCourseCard(
             context,
+            image: "assets/courses/java.png",
             title: "Java Masterclass",
             progress: 0.35,
-            percentage: "35%",
-            icon: Icons.coffee,
           ),
 
           const SizedBox(height: 16),
 
           _buildCourseCard(
             context,
+            image: "assets/courses/spring.png",
             title: "Spring Boot API",
             progress: 0.80,
-            percentage: "80%",
-            icon: Icons.rocket_launch,
           ),
         ],
       ),
@@ -53,110 +48,113 @@ class MyCoursesScreen extends StatelessWidget {
 
   Widget _buildCourseCard(
       BuildContext context, {
+        required String image,
         required String title,
         required double progress,
-        required String percentage,
-        required IconData icon,
       }) {
 
+    final percentage =
+    (progress * 100).toInt();
+
     return Card(
-      elevation: 5,
+      elevation: 4,
 
       shape: RoundedRectangleBorder(
         borderRadius:
         BorderRadius.circular(20),
       ),
 
-      child: Padding(
-        padding:
-        const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment:
+        CrossAxisAlignment.start,
 
-        child: Column(
-          crossAxisAlignment:
-          CrossAxisAlignment.start,
+        children: [
 
-          children: [
+          ClipRRect(
+            borderRadius:
+            const BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
 
-            Row(
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(16),
+
+            child: Column(
+              crossAxisAlignment:
+              CrossAxisAlignment.start,
+
               children: [
 
-                CircleAvatar(
-                  radius: 24,
-                  child: Icon(icon),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight:
+                    FontWeight.bold,
+                  ),
                 ),
 
-                const SizedBox(width: 12),
+                const SizedBox(height: 12),
 
-                Expanded(
-                  child: Text(
-                    title,
-                    style:
-                    const TextStyle(
-                      fontSize: 20,
-                      fontWeight:
-                      FontWeight.bold,
+                Text(
+                  "$percentage% Completed",
+                ),
+
+                const SizedBox(height: 8),
+
+                LinearProgressIndicator(
+                  value: progress,
+                  minHeight: 8,
+
+                  borderRadius:
+                  BorderRadius.circular(
+                    10,
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                SizedBox(
+                  width: double.infinity,
+
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(
+
+                        SnackBar(
+                          content: Text(
+                            "Continue $title",
+                          ),
+                        ),
+                      );
+                    },
+
+                    icon: const Icon(
+                      Icons.play_arrow,
+                    ),
+
+                    label: const Text(
+                      "Continue Learning",
                     ),
                   ),
                 ),
               ],
             ),
-
-            const SizedBox(height: 20),
-
-            Text(
-              "$percentage Completed",
-              style: const TextStyle(
-                fontWeight:
-                FontWeight.w500,
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            ClipRRect(
-              borderRadius:
-              BorderRadius.circular(
-                10,
-              ),
-
-              child:
-              LinearProgressIndicator(
-                value: progress,
-                minHeight: 10,
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            SizedBox(
-              width: double.infinity,
-
-              child: ElevatedButton.icon(
-                onPressed: () {
-
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(
-
-                    SnackBar(
-                      content: Text(
-                        "Opening $title",
-                      ),
-                    ),
-                  );
-                },
-
-                icon: const Icon(
-                  Icons.play_arrow,
-                ),
-
-                label: const Text(
-                  "Continue Learning",
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

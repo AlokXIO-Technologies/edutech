@@ -57,5 +57,6 @@ flutter:
 
   assets:
     - assets/banners/
+    - assets/courses/
 
 

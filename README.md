@@ -1,93 +1,51 @@
-# EduTech
+# EduTech - Flutter Learning Platform
 
-A modern cross-platform learning platform built with Flutter.
-
-EduTech is designed to provide a seamless learning experience across mobile and web platforms. The project focuses on clean architecture, scalable development practices, and a modern user experience.
+EduTech is a Flutter-based learning platform built for practicing mobile app development concepts such as navigation, state management, responsive UI design, dark mode, reusable components, and course management.
 
 ## Features
 
-### Implemented
-
 * Splash Screen
 * Login Screen
-* Home Screen
-* Navigation Flow
-* Flutter Material Design UI
-* Android Support
-* Web Support
-
-### Planned
-
+* Register Screen
+* Forgot Password Screen
+* Home Dashboard
+* Banner Slider
 * Course Listing
-* Course Details
-* User Authentication
-* Enrollment System
-* REST API Integration
-* State Management
-* Progress Tracking
-* Responsive UI
+* Course Detail Screen
+* Study Materials
+* My Courses
+* My Tests
+* User Profile
+* Dark Mode Support
+* Logout Functionality
 
 ## Tech Stack
 
 * Flutter
 * Dart
-* Material Design
-* Android Studio
-
-## Project Structure
-
-```text
-lib
-├── data
-├── models
-├── screens
-├── widgets
-└── main.dart
-```
-
-## Getting Started
-
-### Prerequisites
-
-* Flutter SDK
-* Android Studio
-* Android Emulator or Physical Device
-
-### Installation
-
-```bash
-git clone https://github.com/<your-username>/edutech.git
-cd edutech
-
-flutter pub get
-flutter run
-```
-
-## Development Roadmap
-
-* [x] Project Setup
-* [x] Splash Screen
-* [x] Login Screen
-* [x] Home Screen
-* [x] Navigation
-* [ ] Course Module
-* [ ] API Integration
-* [ ] Authentication
-* [ ] State Management
-* [ ] Production Deployment
+* Material Design 3
 
 ## Screens
 
-Currently implemented:
+* Home
+* Courses
+* Course Details
+* Materials
+* My Courses
+* My Tests
+* Profile
 
-* Splash Screen
-* Login Screen
-* Home Screen
+## Future Improvements
 
-Additional screens will be added as the project evolves.
+* Backend Integration
+* User Authentication API
+* Course Enrollment
+* PDF Viewer
+* Online Tests
+* Progress Tracking
+* Payment Gateway
+* Cloud Storage
 
 ## Author
 
-**Alok Verma**
-
-Built with Flutter ❤️
+Alok Verma
