@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
-import 'courses_screen.dart';
 import 'profile_screen.dart';
 import 'my_courses_screen.dart';
+import 'materials_screen.dart';
+import 'my_tests_screen.dart';
 
 class MainScreen extends StatefulWidget {
 
@@ -33,16 +34,15 @@ class _MainScreenState
 
       const HomeScreen(),
 
-      const CoursesScreen(),
+      const MaterialsScreen(),
 
       const MyCoursesScreen(),
 
-      ProfileScreen(
-        isDarkMode:
-        widget.isDarkMode,
+      const MyTestsScreen(),
 
-        toggleTheme:
-        widget.toggleTheme,
+      ProfileScreen(
+        isDarkMode: widget.isDarkMode,
+        toggleTheme: widget.toggleTheme,
       ),
     ];
 
@@ -75,19 +75,25 @@ class _MainScreenState
           ),
 
           NavigationDestination(
-            icon: Icon(Icons.menu_book),
-            label: 'Courses',
+            icon: Icon(Icons.school),
+            label: 'My Courses',
           ),
 
           NavigationDestination(
-            icon: Icon(Icons.school),
-            label: 'My Courses',
+            icon: Icon(Icons.menu_book),
+            label: 'Materials',
+          ),
+
+          NavigationDestination(
+            icon: Icon(Icons.quiz),
+            label: 'My Tests',
           ),
 
           NavigationDestination(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
+
         ],
       ),
     );
